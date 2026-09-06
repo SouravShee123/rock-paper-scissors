@@ -1,4 +1,4 @@
-
+// Getting computer choice
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random()*3);
         if(randomNumber===0){
@@ -12,6 +12,7 @@ function getComputerChoice() {
         }
 }
 
+// Getting human choice
 function getHumanChoice() {
     let myChoice = parseInt(prompt("Enter 0 for rock, 1 for paper and 2 for scissors"));
     if(myChoice === 0){
@@ -25,6 +26,7 @@ function getHumanChoice() {
     }
 }
 
+// Storing the Score and Winner of a round
 let humanScore = 0;
 let computerScore = 0;
 function playRound(humanSelection,computerChoice){
@@ -60,19 +62,21 @@ function playRound(humanSelection,computerChoice){
     
 }
 
-
+// Getting the result of a round inside a new function so that we can use it later
 function playGame() {
     const humanSelection = getHumanChoice();
     const computerSelection = getComputerChoice();
     playRound(humanSelection,computerSelection);
 }
 
+// Using the function for multiple round
 for(let i=0; i<5 ;i++){
     console.log(`Round ${i+1}`);
     playGame();
     console.log(`Current Score - You: ${humanScore} | Computer ${computerScore}`);
 }
 
+// Printing the final result
 console.log("----FINAL RESULT----");
 if(humanScore > computerScore) {
     console.log(`You won the game! ${humanScore} to ${computerScore}`);
