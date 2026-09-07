@@ -1,89 +1,51 @@
+let humanScore = 0;
+let computerScore = 0;
+
 // Getting computer choice
 function getComputerChoice() {
-    let randomNumber = Math.floor(Math.random()*3);
-        if(randomNumber===0){
-            return "rock";
-        }
-        else if(randomNumber===1){
-            return "paper";
-        }
-        else{
-            return "scissors"
-        }
-}
-
-// Getting human choice
-function getHumanChoice() {
-    let myChoice = parseInt(prompt("Enter 0 for rock, 1 for paper and 2 for scissors"));
-    if(myChoice === 0){
+    let randomNumber = Math.floor(Math.random() * 3);
+    if (randomNumber === 0) {
         return "rock";
-    }
-    else if(myChoice === 1){
+    } else if (randomNumber === 1) {
         return "paper";
-    }
-    else{
-        return "scissors"
+    } else {
+        return "scissors";
     }
 }
 
 // Storing the Score and Winner of a round
-let humanScore = 0;
-let computerScore = 0;
-function playRound(humanSelection,computerChoice){
+function playRound(humanSelection, computerChoice) {
     let humanInput = humanSelection.toLowerCase();
-    if(humanInput==="rock" && computerChoice==="paper"){
+    if (humanInput === "rock" && computerChoice === "paper") {
         console.log("You lose! Paper beats Rock");
         computerScore++;
-    }
-    else if(humanInput==="paper" && computerChoice==="scissors"){
+    } else if (humanInput === "paper" && computerChoice === "scissors") {
         console.log("You lose! Scissors beats Paper");
         computerScore++;
-    }
-    else if(humanInput==="scissors" && computerChoice==="rock"){
+    } else if (humanInput === "scissors" && computerChoice === "rock") {
         console.log("You lose! Rock beats Scissors");
         computerScore++;
-    }
-    else if(humanInput==="rock" && computerChoice==="scissors"){
+    } else if (humanInput === "rock" && computerChoice === "scissors") {
         console.log("You win! Rock beats Scissors");
         humanScore++;
-    }
-    else if(humanInput==="paper" && computerChoice==="rock"){
+    } else if (humanInput === "paper" && computerChoice === "rock") {
         console.log("You win! Paper beats Rock");
         humanScore++;
-    }
-    else if(humanInput==="scissors" && computerChoice==="paper"){
+    } else if (humanInput === "scissors" && computerChoice === "paper") {
         console.log("You win! Scissors beats Paper");
         humanScore++;
-    }
-    else{
+    } else {
         console.log("Its a draw! Lets go again");
-
     }
-    
 }
 
-// Getting the result of a round inside a new function so that we can use it later
-function playGame() {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    playRound(humanSelection,computerSelection);
-}
+// Add EventListener 
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button)=>{
+    button.addEventListener("click",()=>{
+        const humanSelection = button.className;  // assigns the value by the className of the button
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection,computerSelection);
+    })
+})
 
-// Using the function for multiple round
-for(let i=0; i<5 ;i++){
-    console.log(`Round ${i+1}`);
-    playGame();
-    console.log(`Current Score - You: ${humanScore} | Computer ${computerScore}`);
-}
-
-// Printing the final result
-console.log("----FINAL RESULT----");
-if(humanScore > computerScore) {
-    console.log(`You won the game! ${humanScore} to ${computerScore}`);
-}
-else if(humanScore < computerScore){
-    console.log(`Computer won the game! ${humanScore} to ${computerScore}`);
-}
-else{
-    console.log(`The game is a tie! ${humanScore} to ${computerScore}`)
-}
